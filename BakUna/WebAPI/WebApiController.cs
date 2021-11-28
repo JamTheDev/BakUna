@@ -32,10 +32,15 @@ namespace BakUna.WebAPI
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        public Task<string> GetData(string path)
+        public Task<string> GetData(string path, out int responseCode)
         {
-            if (!path.Contains("api")) return null;
+            if (!path.Contains("api"))
+            {
+                responseCode = 0;
+                return null;
+            }
             HttpResponseMessage response = client.GetAsync(path).Result;
+            responseCode = (int)response.StatusCode;
             return response.Content.ReadAsStringAsync();
         }
 

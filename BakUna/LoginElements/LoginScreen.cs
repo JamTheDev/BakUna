@@ -2,6 +2,7 @@
 using BakUna.Utilities;
 using BakUna.WebAPI;
 using System.Windows.Forms;
+using System.Threading;
 using System.Runtime.Serialization;
 
 namespace BakUna
@@ -16,7 +17,7 @@ namespace BakUna
             //
         }
 
-        private async void Form1_Load(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
             // Create the recievers and controllers
             controller = WebApiController.getInstance;
@@ -29,14 +30,50 @@ namespace BakUna
             
         }
 
-        private async void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            string param = "api/users/?user_id=" + userid.Text;
-            Credentials creds = reciever.Deserialize<Credentials>(await controller.GetData(param));
-            if (password.Text.Equals(creds.password))
+            if (!controller.HasLoaded)
             {
-                userid.Text = "good pasword!";
+                ConfirmationLabel.Text = "No internet connection, or database is not working!";
+                return;
+            }
+
+            ConfirmationLabel.Text = "Authenticating. . .";
+            Thread thread = new Thread(StartAuthentication);
+            thread.Start();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        public async void StartAuthentication()
+        {
+            int responseCode = 0;
+            string param = "api/auth/?user_id=" + userid.Text + "&password=" + password.Text;
+            Authentication auth = reciever.Deserialize<Authentication>(await controller.GetData(param, out responseCode));
+            if (responseCode != 200)
+            {
+                ConfirmationLabel.Text = "No internet connection!";
+                return;
+            }
+            if (auth.LoginUser())
+            {
+                this.Invoke(new MethodInvoker(delegate ()
+                {
+                    ConfirmationLabel.Text = "Success!";
+                }));
+            } else
+            {
+                this.Invoke(new MethodInvoker(delegate ()
+                {
+                    ConfirmationLabel.Text = "Wrong password..." + responseCode;
+                }));
+                
             }
         }
+
     }
+
 }

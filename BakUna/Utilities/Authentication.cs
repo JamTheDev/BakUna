@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace BakUna.Utilities
 {
+    [DataContract]
     class Authentication
     {
-        public void LoginUser()
+        [DataMember] public int response;
+
+        public bool LoginUser()
         {
-
-        }
-
-        public void SignOutUser()
-        {
-
+            return response == 1;
         }
 
     }
