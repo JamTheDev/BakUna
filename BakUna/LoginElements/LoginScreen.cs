@@ -3,7 +3,7 @@ using BakUna.Utilities;
 using BakUna.WebAPI;
 using System.Windows.Forms;
 using System.Threading;
-using System.Runtime.Serialization;
+using BakUna.MainScreenForm;
 
 namespace BakUna
 {
@@ -14,7 +14,7 @@ namespace BakUna
         public LoginScreen()
         {
             InitializeComponent();
-            //
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -43,35 +43,45 @@ namespace BakUna
             thread.Start();
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         public async void StartAuthentication()
         {
             int responseCode = 0;
-            string param = "api/auth/?user_id=" + userid.Text + "&password=" + password.Text;
+            string param = "api/auth/?auth_key=" + Encryptor.MD5Hash(userid.Text + password.Text);
             Authentication auth = reciever.Deserialize<Authentication>(await controller.GetData(param, out responseCode));
+
             if (responseCode != 200)
             {
-                ConfirmationLabel.Text = "No internet connection!";
+                Invoke(new MethodInvoker(delegate ()
+                {
+                    ConfirmationLabel.Text = "No internet connection!";
+                }));
                 return;
             }
+
             if (auth.LoginUser())
             {
-                this.Invoke(new MethodInvoker(delegate ()
+                Invoke(new MethodInvoker(delegate ()
                 {
                     ConfirmationLabel.Text = "Success!";
+                    NavigateToMainMenu();
                 }));
             } else
             {
-                this.Invoke(new MethodInvoker(delegate ()
+                Invoke(new MethodInvoker(delegate ()
                 {
                     ConfirmationLabel.Text = "Wrong password..." + responseCode;
                 }));
                 
             }
+
+            
+        }
+
+        private void NavigateToMainMenu()
+        {
+            Hide();
+            new MainScreen().Show();
+            
         }
 
     }
