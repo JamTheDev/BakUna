@@ -23,6 +23,8 @@ namespace BakUna
             controller = WebApiController.getInstance;
             reciever = new RestJsonReciever();
 
+            LoginButton.FlatAppearance.BorderSize = 0;
+
             // Setup the web api
             if (!controller.HasLoaded)
                 controller.LoadWebApi("https://BakUnaAPI.jamemmanuelarev.repl.co");
@@ -84,6 +86,15 @@ namespace BakUna
             
         }
 
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ExitButtonClick(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 
 }

@@ -60,5 +60,6 @@ namespace BakUna.MainScreenForm
             // Here we define the height of each item on your list.
             VacListBox.ItemHeight = 40;
         }
+
     }
 }
