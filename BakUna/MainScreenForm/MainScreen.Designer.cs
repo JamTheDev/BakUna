@@ -56,7 +56,7 @@
             // 
             this.VacListBox.BackColor = System.Drawing.Color.White;
             this.VacListBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.VacListBox.Cursor = System.Windows.Forms.Cursors.SizeNESW;
+            this.VacListBox.Cursor = System.Windows.Forms.Cursors.Default;
             this.VacListBox.FormattingEnabled = true;
             this.VacListBox.ItemHeight = 15;
             this.VacListBox.Location = new System.Drawing.Point(218, 199);
@@ -64,12 +64,13 @@
             this.VacListBox.Size = new System.Drawing.Size(500, 450);
             this.VacListBox.TabIndex = 1;
             this.VacListBox.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.VacBoxDrawItem);
+            this.VacListBox.SelectedIndexChanged += new System.EventHandler(this.VacBoxItemClicked);
             // 
             // NonVacListBox
             // 
             this.NonVacListBox.BackColor = System.Drawing.Color.White;
             this.NonVacListBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.NonVacListBox.Cursor = System.Windows.Forms.Cursors.SizeNESW;
+            this.NonVacListBox.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.NonVacListBox.FormattingEnabled = true;
             this.NonVacListBox.ItemHeight = 15;
             this.NonVacListBox.Location = new System.Drawing.Point(750, 199);
@@ -82,9 +83,9 @@
             // 
             this.button1.Location = new System.Drawing.Point(12, 199);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(95, 23);
             this.button1.TabIndex = 3;
-            this.button1.Text = "button1";
+            this.button1.Text = "View Selected";
             this.button1.UseVisualStyleBackColor = true;
             // 
             // button2
@@ -205,6 +206,7 @@
             this.Controls.Add(this.VacListBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "MainScreen";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MainScreen";
             this.Load += new System.EventHandler(this.OnFormLoad);
             this.ResumeLayout(false);
