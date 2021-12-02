@@ -19,6 +19,7 @@ namespace BakUna
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            loading.Hide();
             // Create the recievers and controllers
             controller = WebApiController.getInstance;
             reciever = new RestJsonReciever();
@@ -42,6 +43,7 @@ namespace BakUna
 
             ConfirmationLabel.Text = "Authenticating. . .";
             Thread thread = new Thread(StartAuthentication);
+            loading.Show();
             thread.Start();
         }
 
@@ -50,12 +52,14 @@ namespace BakUna
             int responseCode = 0;
             string param = "api/auth/?auth_key=" + Encryptor.MD5Hash(userid.Text + password.Text);
             Authentication auth = reciever.Deserialize<Authentication>(await controller.GetData(param, out responseCode));
+            
 
             if (responseCode != 200)
             {
                 Invoke(new MethodInvoker(delegate ()
                 {
                     ConfirmationLabel.Text = "No internet connection!";
+                    loading.Hide();
                 }));
                 return;
             }
@@ -65,6 +69,7 @@ namespace BakUna
                 Invoke(new MethodInvoker(delegate ()
                 {
                     ConfirmationLabel.Text = "Success!";
+                    loading.Hide();
                     NavigateToMainMenu();
                 }));
             } else
@@ -72,6 +77,7 @@ namespace BakUna
                 Invoke(new MethodInvoker(delegate ()
                 {
                     ConfirmationLabel.Text = "Wrong password..." + responseCode;
+                    loading.Hide();
                 }));
                 
             }

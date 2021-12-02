@@ -14,7 +14,7 @@ namespace BakUna.Utilities
             //compute hash from the bytes of text  
             md5.ComputeHash(Encoding.ASCII.GetBytes(text));
 
-            //get hash result after compute it  
+            //get hash result after computing it  
             byte[] result = md5.Hash;
 
             StringBuilder strBuilder = new StringBuilder();

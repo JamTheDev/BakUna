@@ -41,10 +41,12 @@ namespace BakUna
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
+            this.loading = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.loading)).BeginInit();
             this.SuspendLayout();
             // 
             // userid
@@ -109,10 +111,11 @@ namespace BakUna
             // ConfirmationLabel
             // 
             this.ConfirmationLabel.AutoSize = true;
-            this.ConfirmationLabel.Location = new System.Drawing.Point(990, 517);
+            this.ConfirmationLabel.Location = new System.Drawing.Point(938, 516);
             this.ConfirmationLabel.Name = "ConfirmationLabel";
             this.ConfirmationLabel.Size = new System.Drawing.Size(0, 15);
             this.ConfirmationLabel.TabIndex = 4;
+            this.ConfirmationLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pictureBox1
             // 
@@ -175,12 +178,25 @@ namespace BakUna
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.ExitButtonClick);
             // 
+            // loading
+            // 
+            this.loading.Image = global::BakUna.Properties.Resources.Load_Anim;
+            this.loading.Location = new System.Drawing.Point(938, 544);
+            this.loading.Name = "loading";
+            this.loading.Size = new System.Drawing.Size(100, 96);
+            this.loading.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.loading.TabIndex = 9;
+            this.loading.TabStop = false;
+            this.loading.UseWaitCursor = true;
+            this.loading.Visible = false;
+            // 
             // LoginScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1280, 700);
+            this.Controls.Add(this.loading);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.pictureBox2);
@@ -201,6 +217,7 @@ namespace BakUna
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.loading)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -219,6 +236,7 @@ namespace BakUna
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.PictureBox loading;
     }
 }
 

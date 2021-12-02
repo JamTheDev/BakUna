@@ -107,5 +107,10 @@ namespace BakUna.MainScreenForm
                 return;
             new ExtendedUserInForm(data[VacListBox.SelectedIndex]).Show();
         }
+
+        private void OnApplicationClose(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
