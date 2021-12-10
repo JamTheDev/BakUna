@@ -42,7 +42,7 @@ namespace BakUna.MainScreenForm
 
 
         /// <summary>
-        /// This is for Drawing the items to both the VacBox and NonVacBox ListBoxes
+        /// This is for Drawing the items to both the VacBox and NonVacBox ListBoxes draw string
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
