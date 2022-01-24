@@ -4,113 +4,200 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
+using System.Linq;
 using System.Windows.Forms;
 using BakUna.WebAPI;
 using BakUna.Utilities;
 using System.Drawing.Text;
+using System.Net.Http.Json;
 using System.Diagnostics;
+using System.Threading.Tasks;
+using BakUna.MainScreenForm;
+using BakUna.LoginElements;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace BakUna.MainScreenForm
 {
+
+    public enum WindowOpen
+    {
+        AddEmployee, ViewDetails, MarkAsVaccinated, Nothing
+    }
+
+
     public partial class MainScreen : Form
     {
-        List<UserData> data;
-
+        string filter = string.Empty;
+        UserVaccinationDetails data;
         WebApiController controller;
-        RestJsonReciever reciever;
+        UserItemDesign itemSelected = null;
 
-        int responseCode;
-        bool hasInteracted = false;
+        string branch_city, branch_location;
+        string previousItemSelected = string.Empty;
 
-        public MainScreen()
+        WindowOpen windowOpen = WindowOpen.Nothing;
+
+        // getters and setters
+
+        public WindowOpen ThisWindowState
+        {
+            get { return windowOpen; }
+            set { windowOpen = value; }
+        }
+
+        public MainScreen(string branch_location, string branch_city)
         {
             InitializeComponent();
-            Init();
-        }
 
-        private async void Init()
-        {
-            
             controller = WebApiController.getInstance;
-            reciever = new RestJsonReciever();
 
-            string param = "api/employeedata/employeevac/";
-            data = reciever.Deserialize<List<UserData>>(await controller.GetData(param, out responseCode));
+            this.branch_city = branch_city;
+            this.branch_location = branch_location;
 
-            VacListBox.DataSource = data;
+            branch_name.Text = branch_location;
+
+            
+            PopulateList();
         }
 
-
-        /// <summary>
-        /// This is for Drawing the items to both the VacBox and NonVacBox ListBoxes draw string
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void VacBoxDrawItem(object sender, DrawItemEventArgs e)
+        private async Task RefreshData(string status)
         {
-            if(!hasInteracted)
-                hasInteracted = true;
 
-            Brush roomsBrush;
-            if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+            string param = $"api/branch/get?branch_city={branch_city}&branch_location={branch_location}&status={status}";
+            data = await controller.GetHttpClient.GetFromJsonAsync<UserVaccinationDetails>(param);
+        }
+
+        private async void PopulateList()
+        {
+            await RefreshData("all");
+
+            progressBar.Value = 0;
+            total_employees.Text = "0";
+            vac_count_label.Text = "0";
+            non_vac_count_label.Text = "0";
+
+            List<UserData> dataMerged = filter switch { 
+                "vaccinated" => data.vaccinated,
+                "non_vaccinated" => data.non_vaccinated,
+                "allrb" => Extensions.Join(data.vaccinated, data.non_vaccinated),
+                _ => Extensions.Join(data.vaccinated, data.non_vaccinated)
+            };
+
+            if(panelList.Controls.Count > 0)
             {
-                e = new DrawItemEventArgs(e.Graphics, e.Font, e.Bounds,
-                    e.Index, e.State ^ DrawItemState.Selected, e.ForeColor, SystemColors.Control);
-
-                roomsBrush = Brushes.Black;
+                List<UserControl> listControls = panelList.Controls.Cast<UserControl>().ToList();
+                foreach (UserItemDesign item in listControls)
+                {
+                    panelList.Controls.Remove(item);
+                    item.Dispose();
+                }
             }
-            else
+
+            for (int i = 0; i < dataMerged.Count; i++)
             {
-                roomsBrush = Brushes.Gray;
+                if (dataMerged[i]._id == null || dataMerged[i]._id == "null") continue;
+                UserItemDesign design = new UserItemDesign(dataMerged[i]);
+                design.Index = i;
+                design.Name = "item" + i;
+                design.onItemClicked += OnItemSelected;
+                panelList.Controls.Add(design);
+            }
+            decimal percentage = 0;
+            if (data.vaccinated.Count + data.non_vaccinated.Count > 0)
+            {
+                percentage = ((decimal)data.vaccinated.Count / ((decimal)data.vaccinated.Count + data.non_vaccinated.Count)) * 100;
             }
 
-            var linePen = new Pen(SystemBrushes.Control);
-            var lineStartPoint = new Point(e.Bounds.Left, e.Bounds.Height + e.Bounds.Top);
-            var lineEndPoint = new Point(e.Bounds.Width, e.Bounds.Height + e.Bounds.Top);
+            progressBar.Value = (int)Math.Round(percentage);
+            total_employees.Text = data.vaccinated.Count + data.non_vaccinated.Count + "";
+            vac_count_label.Text = data.vaccinated.Count.ToString();
+            non_vac_count_label.Text = data.non_vaccinated.Count.ToString();
+        }
 
-            e.Graphics.DrawLine(linePen, lineStartPoint, lineEndPoint);
-            e.DrawBackground();
+        public void Success()
+        {
+            PopulateList();
+        }
 
-            var dataItem = VacListBox.Items[e.Index] as UserData;
-            var nameFont = new Font("Segoe UI", 10, FontStyle.Bold);
-            var isVaccinatedFont = new Font("Segoe UI", 8, FontStyle.Regular);
+        private void OnItemSelected(object sender, EventArgs e, int index)
+        {
+            var button = sender as Button;
+            
 
-            e.Graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
-            e.Graphics.DrawString("Name: " + dataItem.name, nameFont, Brushes.Black, e.Bounds.Left + 3, e.Bounds.Top + 5);
-            if (!dataItem.second_dose_date.StartsWith("null"))
+            if (previousItemSelected.Equals(string.Empty))
             {
-                e.Graphics.DrawString("Is Vaccinated: " + dataItem.is_vaccinated + "\tSecond Dose: " + dataItem.second_dose_date, isVaccinatedFont, Brushes.Black, e.Bounds.Left + 3, e.Bounds.Top + 23);
+                previousItemSelected = "item" + index;
             } else
             {
-                e.Graphics.DrawString("Is Vaccinated: " + dataItem.is_vaccinated + "\tFirst Dose: " + dataItem.first_dose_date, isVaccinatedFont, roomsBrush, e.Bounds.Left + 3, e.Bounds.Top + 23);
+                if(previousItemSelected != "item" + index)
+                {
+                    UserItemDesign design = (UserItemDesign)panelList.Controls[previousItemSelected];
+                    design.Button.Text = "SELECT";
+                    previousItemSelected = "item" + index;
+                }
             }
-            
-            
-        }
 
-        private void NonVacDrawItem(object sender, DrawItemEventArgs e)
-        {
+            button.Text = "SELECTED";
+
+            itemSelected = panelList.Controls["item" + index] as UserItemDesign;
 
         }
 
-        private void OnFormLoad(object sender, EventArgs e)
+        private void ViewDetailButton(object sender, EventArgs e)
         {
-            VacListBox.DrawMode = DrawMode.OwnerDrawFixed;
-
-            // Here we define the height of each item on your list.
-            VacListBox.ItemHeight = 40;
+            if(itemSelected != null && windowOpen == WindowOpen.Nothing)
+            {
+                ExtendedUserInForm mForm = new ExtendedUserInForm(branch_city, branch_location, itemSelected.Data, this);
+                mForm.Location = Location;
+                mForm.StartPosition = FormStartPosition.CenterScreen;
+                mForm.Show();
+                windowOpen = WindowOpen.ViewDetails;
+            }
         }
 
-        private void VacBoxItemClicked(object sender, EventArgs e)
+        private void MarkAsVaccinated(object sender, EventArgs e)
         {
-            if (VacListBox.SelectedIndex < 0 || !hasInteracted)
-                return;
-            new ExtendedUserInForm(data[VacListBox.SelectedIndex]).Show();
+            if (itemSelected != null && windowOpen == WindowOpen.Nothing)
+            {
+                MarkAsVacWindow mForm = new MarkAsVacWindow(branch_city, branch_location, itemSelected.Data, this);
+                mForm.Location = Location;
+                mForm.StartPosition = FormStartPosition.CenterScreen;
+                mForm.Show();
+                windowOpen = WindowOpen.MarkAsVaccinated;
+            }
         }
 
-        private void OnApplicationClose(object sender, EventArgs e)
+        private void AddUser(object sender, EventArgs e)
         {
-            Application.Exit();
+            if (windowOpen == WindowOpen.Nothing)
+            {
+                AddEmployee mForm = new AddEmployee(branch_city, branch_location, this);
+                mForm.Location = Location;
+                mForm.StartPosition = FormStartPosition.CenterScreen;
+                mForm.Show();
+                windowOpen = WindowOpen.AddEmployee;
+            }
+        }
+
+        private void OnCheckedChange(object sender, EventArgs e)
+        {
+            var radio = sender as RadioButton;
+            if(radio.Checked)
+            {
+                filter = groupBox1.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked).Name.ToLower();
+                
+                PopulateList();
+            }
+        }
+
+        private void OnApplicationExit(object sender, EventArgs e)
+        {
+            LoginScreen mForm = new LoginScreen();
+            mForm.Location = Location;
+            mForm.StartPosition = FormStartPosition.CenterScreen;
+            mForm.Show();
+            Close();
         }
     }
 }

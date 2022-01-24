@@ -112,31 +112,100 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Green gradient" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resource\Images\Green gradient.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="HEADER MAIN MENU copy" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resource\Images\HEADER MAIN MENU copy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Load_Anim" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resource\Images\Load_Anim.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="LOGIN PAGE" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resource\Images\LOGIN PAGE.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="LOGO W TAGLINE" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resource\Images\LOGO W TAGLINE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="LOGO" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resource\Images\LOGO.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Page Art" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resource\Images\Page Art.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LOGO W TAGLINE" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resource\Images\LOGO W TAGLINE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Ph_seal_bulacan_malolos_400x400" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resource\Images\Ph_seal_bulacan_malolos_400x400.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="830908-200" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resource\Images\830908-200.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Load_Anim" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resource\Images\Load_Anim.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Calumpit_Bulacan" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resource\Images\Calumpit_Bulacan.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Green gradient" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resource\Images\Green gradient.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon-line-syringe" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resource\Images\icon-line-syringe.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="HEADER MAIN MENU copy1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resource\Images\HEADER MAIN MENU copy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="guiguinto_logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resource\Images\guiguinto_logo.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="830908-2001" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resource\Images\830908-200.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Calumpit_Bulacan1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resource\Images\Calumpit_Bulacan.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Green gradient1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resource\Images\Green gradient.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="guiguinto_logo1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resource\Images\guiguinto_logo.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="HEADER MAIN MENU copy2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resource\Images\HEADER MAIN MENU copy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon-line-syringe1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resource\Images\icon-line-syringe.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Load_Anim1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resource\Images\Load_Anim.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LOGIN PAGE1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resource\Images\LOGIN PAGE.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LOGO W TAGLINE1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resource\Images\LOGO W TAGLINE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LOGO1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resource\Images\LOGO.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Page Art1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resource\Images\Page Art.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Ph_seal_bulacan_malolos_400x4001" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resource\Images\Ph_seal_bulacan_malolos_400x400.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SIDE PANNEL" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resource\Images\SIDE PANNEL.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Sidebar_Gif" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resource\Images\Sidebar_Gif.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="notfullyvac" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resource\images\notfullyvac.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="notvac" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resource\images\notvac.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="vac" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resource\images\vac.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

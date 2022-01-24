@@ -5,14 +5,13 @@ using System.Text;
 
 namespace BakUna.Utilities
 {
-    [DataContract]
     class Authentication
     {
-        [DataMember] public int response;
+        public int response { get; set; }
 
-        public bool LoginUser()
+        public bool authenticated
         {
-            return response == 1;
+            get { return response == 1; }
         }
 
     }
